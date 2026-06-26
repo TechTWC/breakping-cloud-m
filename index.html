@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BreakPing Rest Bank｜Manual Web</title>
+  <meta name="description" content="手動記錄工作與休息，累積休息存摺與 21 天達標支票。" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="mark">BP</span><span>BreakPing Rest Bank</span></div>
+      <nav>
+        <a href="#record">Record</a>
+        <a href="#passbook">Passbook</a>
+        <a href="#cheques">Cheques</a>
+        <a href="#export">Export</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card hero-copy">
+        <p class="eyebrow">Manual Web Edition</p>
+        <h1>把真正休息，存成健康存摺。</h1>
+        <p class="lead">不用安裝 App、不用登入。手動記錄開始工作、開始休息、結束休息；每天達成休息目標，就在存摺中存入一天。累積 21 個達標日，取得 Rest Cheque。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#record">開始使用</a>
+          <button id="sample-data" type="button">載入範例</button>
+        </div>
+      </div>
+
+      <aside class="card bank-card">
+        <p class="eyebrow">Rest Bank</p>
+        <div class="bank-balance"><span id="qualified-days">0</span> / <span id="target-days-hero">21</span></div>
+        <p>達標日：每天休息次數達到設定目標。</p>
+        <div class="progress-wrap">
+          <div class="progress-meta"><span id="goal-label">0 / 21 days</span><span id="goal-percent">0%</span></div>
+          <div class="progress"><i id="goal-progress"></i></div>
+        </div>
+        <div class="cheque-card">
+          <div><strong>Rest Cheque</strong><br><small>No cash value. Future app pass concept.</small></div>
+          <span class="status-pill" id="cheque-status">Locked</span>
+        </div>
+      </aside>
+    </section>
+
+    <main>
+      <section class="card panel" id="record">
+        <div class="section-title">
+          <div><h2>今日紀錄</h2><p>手動記錄工作與休息。資料只存在此瀏覽器。</p></div>
+          <span class="status-pill" id="mode-label">Stopped</span>
+        </div>
+        <div class="controls">
+          <button class="primary" id="start-work" type="button">開始工作</button>
+          <button class="success" id="start-rest" type="button">開始休息</button>
+          <button id="end-rest" type="button">結束休息</button>
+          <button class="danger" id="stop-session" type="button">停止紀錄</button>
+        </div>
+        <div class="settings">
+          <label>每日休息次數目標<input id="daily-rest-goal" type="number" min="1" max="30" value="4" /></label>
+          <label>達標日目標<input id="challenge-days" type="number" min="1" max="365" value="21" /></label>
+          <label>時間軸範圍<input id="timeline-range" value="07:00-18:00" /></label>
+        </div>
+      </section>
+
+      <section class="card panel">
+        <div class="metrics">
+          <div class="metric"><span>今日工作</span><strong id="today-work">0m</strong></div>
+          <div class="metric"><span>今日休息</span><strong id="today-rest">0m</strong></div>
+          <div class="metric"><span>休息次數</span><strong id="today-rest-count">0</strong></div>
+          <div class="metric"><span>連續達標</span><strong id="streak-days">0</strong></div>
+        </div>
+      </section>
+
+      <section class="card panel">
+        <div class="section-title">
+          <div><h2>今日時間軸</h2><p>藍色為工作，綠色為休息，紅點為切換事件。</p></div>
+        </div>
+        <div class="timeline" id="timeline"></div>
+        <div class="legend" id="timeline-legend">07:00-18:00｜整點與半小時刻度</div>
+      </section>
+
+      <section class="grid-two">
+        <div class="card panel" id="passbook">
+          <div class="section-title"><h2>休息存摺</h2><button id="export-csv" type="button">Export CSV</button></div>
+          <div class="list" id="passbook-list"></div>
+        </div>
+        <div class="card panel" id="cheques">
+          <div class="section-title"><h2>Rest Cheques</h2><span class="status-pill">No cash value</span></div>
+          <div class="list" id="cheque-list"></div>
+        </div>
+      </section>
+
+      <section class="card panel" id="export">
+        <div class="section-title"><h2>資料管理</h2><p>本機 localStorage。可備份、匯入或清除。</p></div>
+        <div class="controls">
+          <button id="backup-json" type="button">Backup JSON</button>
+          <button id="restore-json" type="button">Restore JSON</button>
+          <button class="danger" id="clear-data" type="button">Clear data</button>
+          <input id="restore-file" type="file" accept="application/json" hidden />
+        </div>
+      </section>
+    </main>
+
+    <footer>BreakPing Rest Bank Manual Web. Wellness rewards have no cash value.</footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
